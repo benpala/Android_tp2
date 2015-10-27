@@ -1,4 +1,4 @@
-package ca.qc.cstj.android.androidtp2.Model;
+package ca.qc.cstj.android.androidtp2.models;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -9,25 +9,26 @@ import java.util.ArrayList;
  * Created by 0949748 on 2015-10-27.
  */
 public class Cinema {
-    private String id;
+
     private String nom;
     private String adresse;
     private String ville;
-    private String uiid;
+    private String href;
     private String codePostal;
     private String telephone;
 
     public Cinema(JsonObject object)
     {
-        this.id = object.getAsJsonPrimitive("idCinema").getAsString();
-        this.uiid = object.getAsJsonPrimitive("uuid").getAsString();
+
+        this.href = object.getAsJsonPrimitive("href").getAsString();
         this.nom = object.getAsJsonPrimitive("nom").getAsString();
         this.adresse = object.getAsJsonPrimitive("adresse").getAsString();
         this.ville = object.getAsJsonPrimitive("ville").getAsString();
         this.codePostal = object.getAsJsonPrimitive("codePostal").getAsString();
         this.telephone = object.getAsJsonPrimitive("telephone").getAsString();
+
     }
-    public ArrayList<Cinema> createFromJSON(JsonArray jsonArray)
+    public static ArrayList<Cinema> createFromJSON(JsonArray jsonArray)
     {
         ArrayList<Cinema> list_cinema = new ArrayList<>();
         for (JsonElement element: jsonArray)
@@ -37,13 +38,6 @@ public class Cinema {
         return list_cinema;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getNom() {
         return nom;
@@ -69,12 +63,12 @@ public class Cinema {
         this.ville = ville;
     }
 
-    public String getUiid() {
-        return uiid;
+    public String getHref() {
+        return href;
     }
 
-    public void setUiid(String uiid) {
-        this.uiid = uiid;
+    public void setHref(String uiid) {
+        this.href = uiid;
     }
 
     public String getCodePostal() {

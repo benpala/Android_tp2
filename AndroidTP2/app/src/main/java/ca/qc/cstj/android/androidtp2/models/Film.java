@@ -1,4 +1,4 @@
-package ca.qc.cstj.android.androidtp2.Model;
+package ca.qc.cstj.android.androidtp2.models;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
