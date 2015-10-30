@@ -26,7 +26,7 @@ public class Horaire {
 
     public  static ArrayList<Horaire> createFromJSON(JsonArray jsonarray)
     {
-        ArrayList<Horaire> Horaire_list = new ArrayList<>();
+        ArrayList<Horaire> Horaire_list = new ArrayList<Horaire>();
         for (JsonElement element: jsonarray)
         {
             Horaire_list.add(new Horaire(element.getAsJsonObject()));

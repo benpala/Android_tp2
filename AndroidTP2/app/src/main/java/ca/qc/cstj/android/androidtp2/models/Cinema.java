@@ -30,7 +30,7 @@ public class Cinema {
     }
     public static ArrayList<Cinema> createFromJSON(JsonArray jsonArray)
     {
-        ArrayList<Cinema> list_cinema = new ArrayList<>();
+        ArrayList<Cinema> list_cinema = new ArrayList<Cinema>();
         for (JsonElement element: jsonArray)
         {
             list_cinema.add(new Cinema(element.getAsJsonObject()));

@@ -1,40 +1,40 @@
 package ca.qc.cstj.android.androidtp2;
 
 import android.app.Activity;
-
 import android.app.ListFragment;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ListView;
 
 import com.google.gson.JsonArray;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
-
+import ca.qc.cstj.android.androidtp2.adapters.CinemaAdapter;
+import ca.qc.cstj.android.androidtp2.adapters.HoraireAdapter;
 import ca.qc.cstj.android.androidtp2.helpers.Services;
 import ca.qc.cstj.android.androidtp2.models.Cinema;
-import ca.qc.cstj.android.androidtp2.adapters.CinemaAdapter;
+import ca.qc.cstj.android.androidtp2.models.Horaire;
 
 /**
- * Created by 0949748 on 2015-10-27.
+ * Created by 0949748 on 2015-10-30.
  */
-public class CinemaListFragment extends ListFragment {
+public class HoraireListFragment extends ListFragment {
     private OnFragmentInteractionListener mListener;
-
-    public static CinemaListFragment newInstance()
+    private static final String ARG_HREF = "mesHoraires";
+    public static HoraireListFragment newInstance(String href)
     {
-        CinemaListFragment fragment = new CinemaListFragment();
+        HoraireListFragment fragment = new HoraireListFragment();
         Bundle args = new Bundle();
+        href += "/horaires";
+        args.putString(ARG_HREF, href);
         fragment.setArguments(args);
         return fragment;
     }
-    public CinemaListFragment() {
+    public HoraireListFragment() {
         // Required empty public constructor
     }
     @Override
@@ -45,14 +45,15 @@ public class CinemaListFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cinema, container, false);
+        View view = inflater.inflate(R.layout.fragment_horaire, container, false);
 
         final Context context = getActivity().getApplicationContext();
-        Ion.with(context).load(Services.CINEMAS_URL).asJsonArray().setCallback(new FutureCallback<JsonArray>() {
+        Ion.with(context).load(getArguments().getString(ARG_HREF))
+                         .asJsonArray().setCallback(new FutureCallback<JsonArray>() {
             @Override
             public void onCompleted(Exception e, JsonArray result) {
-                CinemaAdapter cinemaAdapter = new CinemaAdapter(context, Cinema.createFromJSON(result));
-                setListAdapter(cinemaAdapter);
+                HoraireAdapter horaireAdapter = new HoraireAdapter(context, Horaire.createFromJSON(result));
+                setListAdapter(horaireAdapter);
             }
         });
 
@@ -80,10 +81,9 @@ public class CinemaListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Cinema uncinema = (Cinema)(getListAdapter().getItem(position));
-        String href = uncinema.getHref();
-        mListener.onFragmentInteraction(href);
+        mListener.onFragmentInteraction(position);
         getListView().setItemChecked(position,true);
+
     }
 
     /**
@@ -98,6 +98,6 @@ public class CinemaListFragment extends ListFragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(String href);
+        public void onFragmentInteraction(int position);
     }
 }

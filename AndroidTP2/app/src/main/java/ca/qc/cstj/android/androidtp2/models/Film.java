@@ -33,7 +33,7 @@ public class Film {
 
     public  static ArrayList<Film> createFromJSON(JsonArray jsonarray)
     {
-        ArrayList<Film> Film_list = new ArrayList<>();
+        ArrayList<Film> Film_list = new ArrayList<Film>();
         for (JsonElement element: jsonarray)
         {
             Film_list.add(new Film(element.getAsJsonObject()));

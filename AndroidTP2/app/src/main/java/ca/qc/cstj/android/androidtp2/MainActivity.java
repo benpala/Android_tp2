@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +21,9 @@ import android.widget.TextView;
 
 
 public class MainActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, CinemaListFragment.OnFragmentInteractionListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+        CinemaListFragment.OnFragmentInteractionListener,
+        HoraireListFragment.OnFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -104,7 +107,18 @@ public class MainActivity extends Activity
     }
 
     @Override
-    public void onFragmentInteraction(int position) {
+    public void onFragmentInteraction(String href) {
         // lors d'un click sur un cinéma!!! on passe par ici.
+
+        HoraireListFragment newHoraire = HoraireListFragment.newInstance(href);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, newHoraire);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void onFragmentInteraction(int position) {
+
     }
 }
