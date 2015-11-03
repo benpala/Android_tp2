@@ -119,6 +119,6 @@ public class MainActivity extends Activity
 
     @Override
     public void onFragmentInteraction(int position) {
-
+        // Détail d'un truc.
     }
 }

@@ -12,4 +12,12 @@
         android:gravity="center"
         android:textColor="#000000"
         />
+    <TextView
+        android:id="@+id/lblcinema"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:textColor="#000000"
+        />
 </LinearLayout>

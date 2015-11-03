@@ -19,6 +19,7 @@ public class HoraireAdapter extends ArrayAdapter<Horaire> {
     private static class ViewHolder
     {
         TextView datehoraire;
+
     }
     public HoraireAdapter(Context context, ArrayList<Horaire> cinema)
     {
@@ -34,7 +35,7 @@ public class HoraireAdapter extends ArrayAdapter<Horaire> {
         {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.listitem_cinema,parent, false);
+            convertView = inflater.inflate(R.layout.listitem_horaire,parent, false);
 
             viewHolder.datehoraire = (TextView)convertView.findViewById(R.id.lbldate);
 

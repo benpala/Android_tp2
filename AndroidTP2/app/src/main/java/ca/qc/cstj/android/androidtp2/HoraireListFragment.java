@@ -48,7 +48,8 @@ public class HoraireListFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_horaire, container, false);
 
         final Context context = getActivity().getApplicationContext();
-        Ion.with(context).load(getArguments().getString(ARG_HREF))
+        String path = getArguments().getString(ARG_HREF);
+        Ion.with(context).load(path)
                          .asJsonArray().setCallback(new FutureCallback<JsonArray>() {
             @Override
             public void onCompleted(Exception e, JsonArray result) {
