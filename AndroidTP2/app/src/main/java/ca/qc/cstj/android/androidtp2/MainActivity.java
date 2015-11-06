@@ -23,8 +23,8 @@ import android.widget.TextView;
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
         CinemaListFragment.OnFragmentInteractionListener,
-        HoraireListFragment.OnFragmentInteractionListener {
-
+        HoraireListFragment.OnFragmentInteractionListener,
+        FilmListFragment.OnFilmFragmentInteractionListener {
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -54,9 +54,18 @@ public class MainActivity extends Activity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, CinemaListFragment.newInstance())
-                .commit();
+        switch (position) {
+            case  0 :   fragmentManager.beginTransaction()
+                        .replace(R.id.container, CinemaListFragment.newInstance())
+                        .addToBackStack("ListeCinema")
+                        .commit();
+                        break;
+            case 1 :    fragmentManager.beginTransaction()
+                        .replace(R.id.container, FilmListFragment.newInstance())
+                        .addToBackStack("ListeFilm")
+                        .commit();
+                        break;
+        }
     }
 
     public void onSectionAttached(int number) {
@@ -121,4 +130,9 @@ public class MainActivity extends Activity
     public void onFragmentInteraction(int position) {
         // Détail d'un truc.
     }
+
+        @Override
+        public void onFilmFragmentInteraction(String href) {
+
+        }
 }

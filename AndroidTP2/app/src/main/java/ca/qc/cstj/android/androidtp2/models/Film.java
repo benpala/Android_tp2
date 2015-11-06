@@ -21,14 +21,8 @@ public class Film {
 
     public Film(JsonObject object)
     {
-        this.idFilm = object.getAsJsonPrimitive("idFilm").getAsString();
-        this.uuid = object.getAsJsonPrimitive("uuid").getAsString();
+        this.uuid = object.getAsJsonPrimitive("href").getAsString();
         this.titre = object.getAsJsonPrimitive("titre").getAsString();
-        this.pays = object.getAsJsonPrimitive("pays").getAsString();
-        this.genre = object.getAsJsonPrimitive("genre").getAsString();
-        this.classe = object.getAsJsonPrimitive("classe").getAsString();
-        this.duree = object.getAsJsonPrimitive("duree").getAsString();
-        this.urlImage = object.getAsJsonPrimitive("urlImage").getAsString();
     }
 
     public  static ArrayList<Film> createFromJSON(JsonArray jsonarray)
