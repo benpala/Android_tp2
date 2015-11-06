@@ -30,7 +30,7 @@ public class Commentaire {
 
     public  static ArrayList<Commentaire> createFromJSON(JsonArray jsonarray)
     {
-        ArrayList<Commentaire> commentaires_list = new ArrayList<>();
+        ArrayList<Commentaire> commentaires_list = new ArrayList<Commentaire>();
         for (JsonElement element: jsonarray)
         {
             commentaires_list.add(new Commentaire(element.getAsJsonObject()));

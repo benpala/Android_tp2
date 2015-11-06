@@ -19,7 +19,7 @@ public class HoraireAdapter extends ArrayAdapter<Horaire> {
     private static class ViewHolder
     {
         TextView datehoraire;
-
+        TextView titreDuFilm;
     }
     public HoraireAdapter(Context context, ArrayList<Horaire> cinema)
     {
@@ -38,13 +38,13 @@ public class HoraireAdapter extends ArrayAdapter<Horaire> {
             convertView = inflater.inflate(R.layout.listitem_horaire,parent, false);
 
             viewHolder.datehoraire = (TextView)convertView.findViewById(R.id.lbldate);
-
+            viewHolder.titreDuFilm = (TextView)convertView.findViewById(R.id.lbltitre);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder)convertView.getTag();
         }
         viewHolder.datehoraire.setText(cinema.getDateHeure());
-
+        viewHolder.titreDuFilm.setText(cinema.getTitreFilm());
         return  convertView;
     }
 }
