@@ -76,6 +76,14 @@ public class FilmListFragment extends ListFragment {
             return view;
     }
 
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Film film = (Film)(getListAdapter().getItem(position));
+        String href = film.getUuid(); // get href-------------------
+        mListener.onFilmFragmentInteraction(href);
+        getListView().setItemChecked(position,true);
+    }
+
     // TODO: Rename method, update argument and hook method into UI event
     /*public void onButtonPressed(Uri uri) {
         if (mListener != null) {
