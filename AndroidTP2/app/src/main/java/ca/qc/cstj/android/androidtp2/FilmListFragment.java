@@ -9,6 +9,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.google.gson.JsonArray;
 import com.koushikdutta.async.future.FutureCallback;
@@ -73,6 +74,14 @@ public class FilmListFragment extends ListFragment {
 
             // Inflate the layout for this fragment
             return view;
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Film film = (Film)(getListAdapter().getItem(position));
+        String href = film.getUuid(); // get href-------------------
+        mListener.onFilmFragmentInteraction(href);
+        getListView().setItemChecked(position,true);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
