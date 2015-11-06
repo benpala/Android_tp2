@@ -8,7 +8,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_example">Example action</string>
-
+    <color name="black">#000000</color>
     <string name="action_settings">Settings</string>
 
 <!-- TODO: Remove or change this placeholder text -->

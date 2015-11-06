@@ -14,13 +14,26 @@ public class Horaire {
 
     private String dateHeure;
     private String hrefcinema;
+
+    public String getTitreFilm() {
+        return titreFilm;
+    }
+
+    public void setTitreFilm(String titreFilm) {
+        this.titreFilm = titreFilm;
+    }
+
     private String titreFilm;
     public Horaire(JsonObject object)
     {
 
         this.dateHeure = object.getAsJsonPrimitive("dateHeure").getAsString();
+        JsonObject ob = object.getAsJsonObject("film");
+        this.titreFilm = ob.getAsJsonPrimitive("titre").getAsString();
         JsonObject j =  object.getAsJsonObject("cinema");
         this.hrefcinema = j.getAsJsonPrimitive("href").getAsString();
+        JsonObject fl =  object.getAsJsonObject("film");
+        this.hrefcinema = fl.getAsJsonPrimitive("href").getAsString();
     }
 
     public  static ArrayList<Horaire> createFromJSON(JsonArray jsonarray)
