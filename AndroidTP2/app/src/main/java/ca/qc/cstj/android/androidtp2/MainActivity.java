@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -19,12 +20,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import ca.qc.cstj.android.androidtp2.models.Horaire;
+
 
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
         CinemaListFragment.OnFragmentInteractionListener,
-        HoraireListFragment.OnFragmentInteractionListener,
-        FilmListFragment.OnFilmFragmentInteractionListener {
+        HoraireListFragment.OnFragmentInteractionListenerHoraire,
+        FilmListFragment.OnFilmFragmentInteractionListener,
+        detailFragment.OnFragmentInteractionListener{
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -127,12 +131,25 @@ public class MainActivity extends Activity
     }
 
     @Override
-    public void onFragmentInteraction(int position) {
-        // Détail d'un truc.
+    public void OnFragmentInteractionListenerHoraire(String href) {
+        detailFragment newDetail = detailFragment.newInstance(href);
+        FragmentTransaction transaction  = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, newDetail);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
-        @Override
-        public void onFilmFragmentInteraction(String href) {
+    @Override
+    public void onFilmFragmentInteraction(String href) {
+        detailFragment newDetail = detailFragment.newInstance(href);
+        FragmentTransaction transaction  = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, newDetail);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
-        }
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        //Detail.
+    }
 }

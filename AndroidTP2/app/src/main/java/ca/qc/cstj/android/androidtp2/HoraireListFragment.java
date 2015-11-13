@@ -24,7 +24,7 @@ import ca.qc.cstj.android.androidtp2.models.Horaire;
  * Created by 0949748 on 2015-10-30.
  */
 public class HoraireListFragment extends ListFragment {
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListenerHoraire mListener;
     private static final String ARG_HREF = "mesHoraires";
     public static HoraireListFragment newInstance(String href)
     {
@@ -71,7 +71,7 @@ public class HoraireListFragment extends ListFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (OnFragmentInteractionListenerHoraire) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -86,9 +86,10 @@ public class HoraireListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        mListener.onFragmentInteraction(position);
+        Horaire unh = (Horaire)(getListAdapter().getItem(position));
+        String href = unh.getHreffilm();
+        mListener.OnFragmentInteractionListenerHoraire(href);
         getListView().setItemChecked(position,true);
-
     }
 
     /**
@@ -101,8 +102,8 @@ public class HoraireListFragment extends ListFragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnFragmentInteractionListenerHoraire {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(int position);
+        public void OnFragmentInteractionListenerHoraire(String position);
     }
 }

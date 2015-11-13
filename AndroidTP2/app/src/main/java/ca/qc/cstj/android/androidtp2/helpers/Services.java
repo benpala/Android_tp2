@@ -5,7 +5,6 @@ package ca.qc.cstj.android.androidtp2.helpers;
  */
 public class Services {
     public  static  final String CINEMAS_URL = "https://tp-1-benpala.c9.io/cinemas";
-    public  static  final String HORRAIRE_URL = "/horaires";
     public  static  final String FILM_URL = "https://tp-1-benpala.c9.io/films";
 }
 
