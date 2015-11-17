@@ -1,6 +1,7 @@
 package ca.qc.cstj.android.androidtp2;
 
 import android.app.Activity;
+import android.app.ListFragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,16 +9,21 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
+import ca.qc.cstj.android.androidtp2.adapters.CommentaireAdapter;
+import ca.qc.cstj.android.androidtp2.models.Commentaire;
 import ca.qc.cstj.android.androidtp2.models.Film;
 
 
-public class detailFragment extends Fragment {
+public class detailFragment extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String URL_HREF = "link";
@@ -25,7 +31,7 @@ public class detailFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String href;
-
+    private  Film monfilm;
     private OnFragmentInteractionListener mListener;
 
     // TODO: Rename and change types and number of parameters
@@ -51,17 +57,44 @@ public class detailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        final StringBuilder build = new StringBuilder();
         final View view = inflater.inflate(R.layout.fragment_detailfilm, container, false);
 
         final Context context = getActivity().getApplicationContext();
-        String path = getArguments().getString("Link");
+        String path = getArguments().getString("link");
         Ion.with(context).load(path)
-                .asJsonArray().setCallback(new FutureCallback<JsonArray>() {
+                .asJsonObject().setCallback(new FutureCallback<JsonObject>() {
             @Override
-            public void onCompleted(Exception e, JsonArray result) {
-                 Film f = new Film(result.getAsJsonObject());
-                ((TextView)view.findViewById(R.id.lbltitle)).setText(f.getTitre());
+            public void onCompleted(Exception e, JsonObject result) {
+                monfilm = new Film(result.getAsJsonObject("film"));
+                /*
+                  private  String uuid;
+                    private  String titre;
+                    private  String pays;
+                    private  String genre;
+                    private  String classe;
+                    private  String duree;
+                    private  String urlImage;
+                 */
+                ((TextView)view.findViewById(R.id.lbltitle)).setText(monfilm.getTitre());
+                ((TextView)view.findViewById(R.id.lblpays)).setText(monfilm.getPays());
+                ((TextView)view.findViewById(R.id.lblclasse)).setText(monfilm.getClasse());
+                ((TextView)view.findViewById(R.id.lblduree)).setText(monfilm.getDuree());
+                 build.append((String)monfilm.getUuid());
+
+                Ion.with(context).load(new StringBuilder().append(monfilm.getUrlImage()).append(".jpg").toString())
+                        .withBitmap()
+                        .intoImageView((ImageView)view.findViewById(R.id.lblimg));
+
+
+                build.append("/commentaires");
+                Ion.with(context).load(build.toString()).asJsonArray().setCallback(new FutureCallback<JsonArray>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonArray result) {
+                        CommentaireAdapter commentaireAdapter = new CommentaireAdapter(context, Commentaire.createFromJSON(result));
+                        ((ListView) view.findViewById(R.id.lstcommentaire)).setAdapter(commentaireAdapter);
+                    }
+                });
             }
         });
         return view;

@@ -23,6 +23,11 @@ public class Film {
     {
         this.uuid = object.getAsJsonPrimitive("href").getAsString();
         this.titre = object.getAsJsonPrimitive("titre").getAsString();
+        this.classe = object.getAsJsonPrimitive("classe").getAsString();
+        this.duree = object.getAsJsonPrimitive("duree").getAsString();
+        this.urlImage = object.getAsJsonPrimitive("imageURL").getAsString();
+        this.pays = object.getAsJsonPrimitive("pays").getAsString();
+
     }
 
     public  static ArrayList<Film> createFromJSON(JsonArray jsonarray)

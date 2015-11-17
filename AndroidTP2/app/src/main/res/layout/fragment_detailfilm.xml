@@ -43,7 +43,7 @@
 
     </GridLayout>
     <ListView
-        android:id="@+id/list"
+        android:id="@+id/lstcommentaire"
         android:layout_width="match_parent"
         android:layout_height="300dp">
     </ListView>

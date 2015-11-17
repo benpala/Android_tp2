@@ -38,7 +38,7 @@ public class CommentaireAdapter extends ArrayAdapter<Commentaire> {
         {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.listitem_film,parent, false);
+            convertView = inflater.inflate(R.layout.listitem_commentaire,parent, false);
 
             viewHolder.lbbcommentaire = (TextView)convertView.findViewById(R.id.lblcommentarie);
             viewHolder.lblauteur = (TextView)convertView.findViewById(R.id.lblauteur);

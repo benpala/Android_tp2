@@ -87,8 +87,8 @@ public class HoraireListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Horaire unh = (Horaire)(getListAdapter().getItem(position));
-        String href = unh.getHreffilm();
-        mListener.OnFragmentInteractionListenerHoraire(href);
+        String newhref = unh.getHreffilm();
+        mListener.OnFragmentInteractionListenerHoraire(newhref);
         getListView().setItemChecked(position,true);
     }
 

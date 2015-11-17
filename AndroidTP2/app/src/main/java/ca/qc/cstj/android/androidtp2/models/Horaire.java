@@ -41,9 +41,9 @@ public class Horaire {
         JsonObject ob = object.getAsJsonObject("film");
         this.titreFilm = ob.getAsJsonPrimitive("titre").getAsString();
         JsonObject j =  object.getAsJsonObject("cinema");
-        this.hreffilm = j.getAsJsonPrimitive("href").getAsString();
+        this.hrefcinema = j.getAsJsonPrimitive("href").getAsString();
         JsonObject fl =  object.getAsJsonObject("film");
-        this.hrefcinema = fl.getAsJsonPrimitive("href").getAsString();
+        this.hreffilm = fl.getAsJsonPrimitive("href").getAsString();
     }
 
     public  static ArrayList<Horaire> createFromJSON(JsonArray jsonarray)
