@@ -8,10 +8,13 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.gson.JsonArray;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+
+import ca.qc.cstj.android.androidtp2.models.Film;
 
 
 public class detailFragment extends Fragment {
@@ -57,7 +60,8 @@ public class detailFragment extends Fragment {
                 .asJsonArray().setCallback(new FutureCallback<JsonArray>() {
             @Override
             public void onCompleted(Exception e, JsonArray result) {
-                view.findViewById(R.id.lbltitle);
+                 Film f = new Film(result.getAsJsonObject());
+                ((TextView)view.findViewById(R.id.lbltitle)).setText(f.getTitre());
             }
         });
         return view;
