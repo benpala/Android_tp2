@@ -9,6 +9,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -97,6 +98,25 @@ public class detailFragment extends Fragment{
                 });
             }
         });
+        Button btnsend = (Button)view.findViewById(R.id.btnSend);
+        btnsend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JsonObject json = new JsonObject();
+                json.addProperty("auteur", "tessssst");
+
+                Ion.with(context)
+                        .load("https://tp-1-benpala.c9.io/films")
+                        .setJsonObjectBody(json)
+                        .asJsonObject()
+                        .setCallback(new FutureCallback<JsonObject>() {
+                            @Override
+                            public void onCompleted(Exception e, JsonObject result) {
+                                // do stuff with the result or error
+                            }
+                        });
+            }
+        });
         return view;
 
     }
@@ -107,6 +127,23 @@ public class detailFragment extends Fragment{
             mListener.onFragmentInteraction(uri);
         }
     }
+    /*
+
+    JsonObject json = new JsonObject();
+json.addProperty("foo", "bar");
+
+Ion.with(context)
+.load("http://example.com/post")
+.setJsonObjectBody(json)
+.asJsonObject()
+.setCallback(new FutureCallback<JsonObject>() {
+   @Override
+    public void onCompleted(Exception e, JsonObject result) {
+        // do stuff with the result or error
+    }
+});
+
+     */
 
     @Override
     public void onAttach(Activity activity) {
